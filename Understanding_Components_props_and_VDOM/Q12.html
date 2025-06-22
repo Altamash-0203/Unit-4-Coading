@@ -1,0 +1,60 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+ </head>
+ <style>
+    .card{
+        display: flex;
+        justify-content: space-evenly;
+        border: 1px solid;
+        padding: 15px;
+    }
+    .card div{
+        border: 1px solid;
+        padding: 20px;
+        background-color: lightgoldenrodyellow;
+    }
+ </style>
+ <body>
+      <div id="root"></div>
+      
+<script type="text/babel">  
+let {useState}=React
+    
+        function Card({title,children}){
+            return(
+                <div>
+                  <b>{title}</b>
+                  <i>{children}</i>
+                </div>
+            )
+        }
+         
+        function App(){
+        return(
+            <div className="card">
+              <Card title="one">
+                <p>first card</p>
+                </Card>
+                
+                <Card title="two">
+                <p>second card</p>
+                </Card>
+
+                <Card title="three">
+                <p>third card</p>
+                </Card>
+            </div>
+        )
+    }
+    ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+
+ </body>
+ </html>
