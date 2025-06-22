@@ -1,0 +1,64 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+ </head>
+ <style>
+    .card{
+        display: f;
+        justify-content: space-evenly;
+        border: 1px solid;
+        padding: 15px;
+    }
+    .card div{
+        display: flex;
+        justify-content: space-between;
+        border: 1px solid;
+        padding: 20px;
+        background-color: lightgoldenrodyellow;
+    }
+ </style>
+ <body>
+      <div id="root"></div>
+      
+<script type="text/babel">  
+
+function UserProfile(props) {
+  return (
+    <div>
+      <h2>User Profile</h2>
+ {/* line remove */}
+        <div>
+          <p>Name: {props.user.name}</p> {/*fix destructuring*/}
+          <p>Email: {props.user.email}</p>{/*fix destructring*/}
+        </div>
+    </div>
+  );
+}
+
+function App() {
+const user = {
+    name: "Aarav Sharma",
+    email: "aarav.sharma@example.com"
+  };
+
+  return (
+    <div>
+      <h1>Welcome</h1>
+      <UserProfile user={user} /> {/* passed data to props*/}
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+
+
+</script>
+
+ </body>
+ </html>
