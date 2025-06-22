@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+</head>
+<body>
+    <button onclick="changeVanila()">vanilla js</button>
+    <p>vanila js=<span id="js-count">0</span></p>
+
+
+    <script>
+        let count=0
+        function changeVanila(){
+            document.title="vanila js"
+            count++
+            document.getElementById('js-count').textContent=count
+        }
+    </script>
+
+
+
+<div id="root"></div>
+
+    <script type="text/babel">
+
+        function App(){
+             const [reactcount, setreactcount] = React.useState(0);
+
+             function updateReact(){
+                document.title="React Js"
+                setreactcount(reactcount+1)
+             }
+
+             return(
+                <div>
+                    <button onClick={updateReact}>Reaxt js</button>
+                    <p>react js={reactcount}</p>
+                    </div>
+             )
+             
+        }
+         
+        let root=ReactDOM.createRoot(document.getElementById('root'))
+        root.render(<App/>)
+    </script>
+
+</body>
+</html>
+
+
+
