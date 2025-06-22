@@ -1,0 +1,70 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+ </head>
+ <style>
+    .card{
+        display: f;
+        justify-content: space-evenly;
+        border: 1px solid;
+        padding: 15px;
+    }
+    .card div{
+        display: flex;
+        justify-content: space-between;
+        border: 1px solid;
+        padding: 20px;
+        background-color: lightgoldenrodyellow;
+    }
+ </style>
+ <body>
+    <div style="display: flex; justify-content: space-around;">
+        <h2>The Right plan for <span style="color: violet;">your Buisness</span> </h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium rerum illo voluptatibus quibusdam assumenda voluptas.</p>
+    </div>
+      <div id="root"></div>
+      
+<script type="text/babel">  
+let {useState}=React
+    
+        function Card({title,arr,price}){
+            return(
+                <div>
+                  <h3>{title}</h3>
+                  <ul>
+                    {arr.map((x,i)=>(
+                        <li key={i}>{x} </li>
+                    ))}
+                  </ul>
+                  <h2>${price}</h2>
+                  <button style={{}}>get Started</button>
+                </div>
+            )
+        }
+         
+        function App(){
+            let starter=["✔1 lorem ipsum","third class","yearly updates"]
+            let plus=["✔2 lorem ipsum","fourth class","once updates"]
+            let pro=["✔3 lorem ipsum","wrost class","no updates"]
+        return(
+           
+            <div className="card">
+              <Card title="starter" arr={starter} price="free"/>
+                
+               <Card title="lorem plus" arr={plus} price="32"/>
+
+              <Card title="lorem pro" arr={pro} price="50"/>
+            </div>
+        )
+    }
+    ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+
+ </body>
+ </html>
