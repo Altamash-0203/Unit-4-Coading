@@ -1,0 +1,76 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+ </head>
+ <style>
+    .card{
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        padding: 40px;
+        margin-top: 50px;
+        border: 2px solid blue;
+        gap: 20px;
+    }
+
+    .usercard{
+        border: 1px solid black;
+        padding: 20px;
+    }
+ </style>
+ <body>
+      <div id="root"></div>
+      
+<script type="text/babel">  
+ let {useState}=React
+
+
+ function Card({name,email,age}){
+    return (
+        <div className="usercard">
+            <h4>{name}</h4>
+            <p>email:{email}</p>
+            <p>age:{age}</p>
+        </div>
+    )
+ }
+
+
+function App() {
+   let [users,setusers]=useState([])
+   let [name,setname]=useState('')
+   let [email,setemail]=useState('')
+   let [age,setage]=useState('')
+
+   function adduser(){
+     if(!name||age<0)return alert('invalid input')
+    setusers([...users,{name,email,age}])
+
+   }
+
+   return(
+    <div>
+        <input value={name} onChange={(e)=>setname(e.target.value)} placeholder="Name" />
+        <input value={email} onChange={(e)=>setemail(e.target.value)} placeholder="email" />
+        <input value={age} onChange={(e)=>setage(e.target.value)} placeholder="age" />
+         <button onClick={adduser}>Add</button>
+
+         <div className='card'>
+            {users.map((x,i)=> <Card key={i} {...x}/>)}
+        </div>
+    </div>
+   )
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+
+
+</script>
+
+ </body>
+ </html>
