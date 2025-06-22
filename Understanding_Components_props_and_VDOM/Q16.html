@@ -1,0 +1,78 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+ </head>
+ <style>
+    .card{
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        padding: 40px;
+        margin-top: 50px;
+        border: 2px solid blue;
+        gap: 20px;
+    }
+
+    .productcard{
+        border: 1px solid black;
+        padding: 20px;
+    }
+ </style>
+ <body>
+      <div id="root"></div>
+      
+<script type="text/babel">  
+ let {useState}=React
+
+
+ function Card({name,price,image,discount}){
+    return (
+        <div className="productcard">
+            <img src={image} alt={name}/>
+            <h4>{name}</h4>
+            <p>${price}</p>
+            <p>discount:{discount}%</p>
+        </div>
+    )
+ }
+
+
+function App() {
+   let [products,setProducts]=useState([])
+   let [name,setname]=useState('')
+   let [price,setprice]=useState('')
+   let [discount,setdiscount]=useState('')
+   let [image,setimage]=useState('')
+
+   function addProduct(){
+    setProducts([...products,{name,price,image,discount}])
+
+   }
+
+   return(
+    <div>
+        <input value={name} onChange={(e)=>setname(e.target.value)} placeholder="Name" />
+        <input value={price} onChange={(e)=>setprice(e.target.value)} placeholder="price" />
+        <input value={image} onChange={(e)=>setimage(e.target.value)} placeholder="url" />
+        <input value={discount} onChange={(e)=>setdiscount(e.target.value)} placeholder="discount" />
+         <button onClick={addProduct}>Add</button>
+
+         <div className='card'>
+            {products.map((pro,i)=> <Card key={i} {...pro}/>)}
+        </div>
+    </div>
+   )
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+
+
+</script>
+
+ </body>
+ </html>
