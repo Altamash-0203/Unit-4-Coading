@@ -1,0 +1,99 @@
+
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+ </head>
+ <style>
+    .cards{
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        font-size: 15px;
+        text-align: center;
+        background-color: cornsilk;
+        gap: 30px;
+        padding: 20px;
+    }
+    .card{
+        border: 1px solid coral;
+        border-radius: 30px;
+        box-shadow: 2px 2px 2px 2px gray;
+    }
+    .card:hover{
+        box-shadow: 12px 12px 12px 12px gray;
+    }
+
+    .card img{
+        border-radius: 30px;
+        border: 1px dotted gray;
+        width: 200px;
+        height: 200px;
+
+    }
+ </style>
+ <body>
+      <div id="root"></div>
+
+      <script type="text/babel">
+        let{useState}=React
+
+    function fetchProducts(setloading,setproducts,seterr){
+        setloading(true)
+        seterr("")
+
+        fetch("https://fakestoreapi.com/products")
+        .then((res)=>{
+            if(!res.ok){
+               alert("something went wrong")
+            }
+          return res.json();
+
+        })
+        .then((data)=>{
+            setloading(false)
+            setproducts(data)
+            // console.log(data)
+
+        })
+        .catch((err)=>{
+            setloading(false)
+            seterr(err.message)
+        })
+
+    }
+
+    function App(){
+         let [products,setproducts]=useState([])
+        let [loading,setloading]=useState(false)
+        let [err,seterr]=useState('')
+         
+        
+      return(
+         <div>
+             <button onClick={() => fetchProducts(setloading, setproducts, seterr)}>fetch data</button>
+           {loading && <div>Loading...</div>}
+           {err && <div>Loading...</div>}
+
+           <div className="cards">
+              {products.map((product)=>(
+                <div className="card" key={product.id}>
+                    <img src={product.image} alt=""/> <br/>
+                    <b>{product.title}</b>  
+                    <p>{product.price}</p>  
+                </div>
+              ))}
+            </div>
+            </div>
+        )
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(<App/>);
+      </script>
+ </body>
+ </html>
