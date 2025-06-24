@@ -17,13 +17,14 @@
 
     function fetchProducts(setloading,setproducts,seterr){
         setloading(true)
-       
+        seterr("")
+
         fetch("https://fakestoreapi.com/products")
         .then((res)=>{
             if(!res.ok){
                alert("something went wrong")
             }
-            return res.json();
+          return res.json();
 
         })
         .then((data)=>{
@@ -32,9 +33,9 @@
             console.log(data)
 
         })
-        .catch((x)=>{
+        .catch((err)=>{
             setloading(false)
-            seterr(x.message)
+            seterr(err.message)
         })
 
     }
@@ -46,8 +47,12 @@
          
         
       return(
-          <button onClick={() => fetchProducts(setloading, setproducts, seterr)}>fetch data</button>
-      )
+         <div>
+             <button onClick={() => fetchProducts(setloading, setproducts, seterr)}>fetch data</button>
+           {loading && <div>Loading...</div>}
+           {err && <div>Loading...</div>}
+            </div>
+        )
     }
 
     const root = ReactDOM.createRoot(document.getElementById("root"));
