@@ -1,0 +1,76 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+ </head>
+  <style>
+    .todoCard{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        font-weight: 500;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        text-transform: capitalize;
+        border: 1px solid red;
+        padding: 20px;
+    }
+  </style>
+ <body>
+      <div id="root"></div>
+      
+<script type="text/babel">  
+ let {useState}=React
+  
+function App(){
+    let [todos,settodos]=useState(["buy milk","study react"])
+    let [newtodo,setnewtodo]=useState("")
+ 
+    function addtodo(){
+        if(newtodo=="") return alert("Enter task ")
+
+            settodos([...todos,newtodo ])
+        
+    }
+
+    function resettodo(){
+       settodos([])
+    }
+
+    let zero=todos.length==0 ?"no tasks add some task":""
+
+ return(
+    <div>
+        <div style={{display:"flex",justifyContent:"center",gap:10}}>
+          <input type="text" value={newtodo} onChange={(e) => setnewtodo(e.target.value)} placeholder="enter todo"/>
+        <button onClick={addtodo}>add todo</button>  
+        <button onClick={resettodo}>clear Todo's</button>    
+        </div>
+        <ul>
+            {zero && <p>{zero}</p>}
+           {todos.map((todo,i)=>(
+            <li className="todoCard" key={i} >
+                 <b>{todo}</b>
+            </li>
+            
+           ))}    
+        </ul>
+    </div>
+ )
+
+
+}
+
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+
+
+</script>
+
+ </body>
+ </html>
