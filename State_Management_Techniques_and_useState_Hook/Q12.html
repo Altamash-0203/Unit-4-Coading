@@ -1,0 +1,84 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+ </head>
+  <style>
+    .taskCard{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        font-weight: 500;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+  </style>
+ <body>
+      <div id="root"></div>
+      
+<script type="text/babel">  
+ let {useState}=React
+  
+function App(){
+    let [tasks,settasks]=useState([])
+    let [newtask,setnewtask]=useState("")
+    let [tid,settid]=useState(1)
+    let [level,setlevel]=useState("")
+
+ 
+    function addtask(){
+        if(newtask && level){
+            settasks([...tasks,{id:tid,title:newtask,complated:false,priority:level}])
+
+            settid(tid+1)
+        }
+    }
+
+    function complateTask(id){
+       settasks(tasks.map(task=>task.id==id ?{...task,complated:!task.complated}:task))
+    }
+
+    function deleteTask(id){
+        settasks(tasks.filter(task=>task.id!=id))
+    }
+
+ return(
+    <div>
+        <input type="text" value={newtask} onChange={(e) => setnewtask(e.target.value)} placeholder="enter Task"/>
+        <select value={level} onChange={(e) => setlevel(e.target.value)}>
+            <option value="">Select Priority</option>
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+          </select>
+        <button onClick={addtask}>add task</button>  
+        
+        <ul>
+           {tasks.map((task)=>(
+            <li className="taskCard" key={task.id} style={{backgroundColor:task.complated?"lightgreen":"brown"}}>
+                 <b>{task.title}</b>
+                 <p>{task.priority}</p>
+                 <button onClick={()=>deleteTask(task.id)}>delete</button>
+                 <button onClick={()=>complateTask(task.id)}>Complated</button>    
+            </li>
+            
+           ))}    
+        </ul>
+    </div>
+ )
+
+
+}
+
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+
+
+</script>
+
+ </body>
+ </html>
